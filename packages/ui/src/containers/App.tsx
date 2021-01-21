@@ -8,6 +8,7 @@ import { AppRouter }from "containers";
 import { Navbar, Sidebar } from "components";
 import { MainProvider } from "contexts";
 import { getEnvVariables } from "utils/environment";
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import { theme } from "styles/theme";
 
@@ -21,6 +22,7 @@ function App() {
       <BrowserRouter>
           <MainProvider>
             <ThemeProvider theme={theme}>
+              <CssBaseline />
               <Navbar />
               <Sidebar />
               <AppRouter />
