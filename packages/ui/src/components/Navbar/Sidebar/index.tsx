@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import {
   AppBar,
@@ -16,18 +16,18 @@ function Sidebar() {
     <div className={classes.sidebarRoot}>
       <AppBar position="sticky">
         <Toolbar className={classes.sideBar}>
-          <Typography className={classes.sideBarTitle}>
+        <NavLink activeClassName={classes.activeSidebar} to="/dashboard" className={classes.sideBarTitle}>
+          <Typography className={classes.link}>
             <img src={vector} alt="" className={classes.vectorLogo} />
-            <Link to="/dashboard" className={classes.link}>
               Dashboard
-            </Link>
           </Typography>
-          <Typography className={classes.sideBarTitle}>
+          </NavLink>
+          <NavLink activeClassName={classes.activeSidebar} to="/proposals" className={classes.sideBarTitle}>
+          <Typography className={classes.link}>
             <img src={vector} alt="" className={classes.vectorLogo} />
-            <Link to="/proposals" className={classes.link}>
               Proposals
-            </Link>
           </Typography>
+          </NavLink>
         </Toolbar>
       </AppBar>
     </div>

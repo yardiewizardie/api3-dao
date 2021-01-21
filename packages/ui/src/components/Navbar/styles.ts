@@ -16,8 +16,12 @@ export const useStyles = makeStyles((theme: Theme) =>
       justifyContent: 'flex-start',
       alignItems: 'center',
       paddingLeft: '19%',
-      
+      color: "white",
+      textDecoration: "unset",
     }, 
+    activeSidebar: {
+      background: 'linear-gradient(90deg, rgba(124,227,203,1) 4%, rgba(3,3,3,1) 4%)'
+    },
     link: {
       color: "white",
       "&:visited": {
@@ -30,7 +34,7 @@ export const useStyles = makeStyles((theme: Theme) =>
       justifyContent: "space-between"
     },
     sidebarRoot: {
-      width: '15%',
+      width: '10vw',
       height: '100vh'
     },
     sideBar: {
