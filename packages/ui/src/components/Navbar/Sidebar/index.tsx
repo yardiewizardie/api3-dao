@@ -8,19 +8,22 @@ import {
 } from "@material-ui/core";
 
 import useStyles from "components/Navbar/styles";
+import vector from "../../../assets/vector.png";
 
 function Sidebar() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography className={classes.title}>
+    <div className={classes.sidebarRoot}>
+      <AppBar position="sticky">
+        <Toolbar className={classes.sideBar}>
+          <Typography className={classes.sideBarTitle}>
+            <img src={vector} alt="" className={classes.vectorLogo} />
             <Link to="/dashboard" className={classes.link}>
               Dashboard
             </Link>
           </Typography>
-          <Typography className={classes.title}>
+          <Typography className={classes.sideBarTitle}>
+            <img src={vector} alt="" className={classes.vectorLogo} />
             <Link to="/proposals" className={classes.link}>
               Proposals
             </Link>

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
-  Typography,
 } from "@material-ui/core";
 
 import { ConnectButton, AddressInfo, Logo } from "components"

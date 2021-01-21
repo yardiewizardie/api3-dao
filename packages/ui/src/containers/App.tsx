@@ -24,8 +24,10 @@ function App() {
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <Navbar />
-              <Sidebar />
-              <AppRouter />
+              <div style={{ display: "flex" }}>
+                <Sidebar />
+                <AppRouter />
+              </div>
             </ThemeProvider>
           </MainProvider>
       </BrowserRouter>

@@ -9,8 +9,14 @@ export const useStyles = makeStyles((theme: Theme) =>
     menuButton: {
       marginRight: theme.spacing(2),
     },
-    title: {
-      flexGrow: 1,
+    sideBarTitle: {
+      height: '6%',
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      paddingLeft: '19%',
+      
     }, 
     link: {
       color: "white",
@@ -22,6 +28,17 @@ export const useStyles = makeStyles((theme: Theme) =>
     header: {
       display: "flex",
       justifyContent: "space-between"
+    },
+    sidebarRoot: {
+      width: '15%',
+      height: '100vh'
+    },
+    sideBar: {
+      display: "flex",
+      flexDirection: "column",
+      height: "100vh",
+      marginTop: "35px",
+      padding: 0
     },
     connectButton: {
       transition: 'all 0.1s',
@@ -35,7 +52,8 @@ export const useStyles = makeStyles((theme: Theme) =>
     vectorLogo: {
       width: 18,
       height: 18,
-      marginTop: '5px'
+      marginTop: '5px',
+      marginRight: '9.5px'
     },
     addressContainer: {
       display: "flex",
