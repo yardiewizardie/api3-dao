@@ -6,7 +6,7 @@ import { Animation, Palette } from '@devexpress/dx-react-chart';
 import useStyles from "components/InsurancePool/styles";
 import useCommonStyles from "styles/common-styles";
 
-function InsurancePool() {
+function InsurancePool(props: any) {
     const classes = useStyles();
     const commonClasses = useCommonStyles();
 
@@ -19,7 +19,10 @@ function InsurancePool() {
 
     return (
     <div className={commonClasses.marginContainer}>
-        <Typography variant="body1" color="secondary">Insurance Pool</Typography>
+        <div className={commonClasses.titleWithButton}>
+            <Typography variant="body1" color="secondary">Insurance Pool</Typography>
+            {props.walletConnected && <Typography variant="body1" color="secondary" style={{ textDecoration: "underline "}}>How This Works</Typography>}
+        </div>
         <div className={commonClasses.borderContainer}> 
         <div className={classes.insurancePoolContainer}>
         <div className={commonClasses.centeredBox} style={{ padding: "1%" }}>
