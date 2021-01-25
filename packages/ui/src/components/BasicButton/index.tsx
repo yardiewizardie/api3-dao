@@ -10,7 +10,9 @@ function BasicButton(props: any) {
   const classes = useStyles();
   return (
     <Box>
-      <Button onClick={props.onClick} color="secondary" className={classes.button}>{props.title}</Button>
+      <button onClick={props.onClick} className={classes.button}>{props.title}</button>
+      <span className={classes.firstSpan} />
+      <span className={classes.secondSpan} />
     </Box>
   );
 }
