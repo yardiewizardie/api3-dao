@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Typography, Modal, Paper, TextField } from "@material-ui/core";
+import { Typography, Modal, Paper, TextField, Box } from "@material-ui/core";
 
 import { BasicButton } from "components"
 import useStyles from "components/Staking/StakingContainer/styles";
@@ -45,10 +45,13 @@ function StakingContainer() {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        <div className={commonClasses.centeredBox} style={{ height: "100%" }}>
+        <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" height="100%">
           { 
             !nextTabModal ? (
               <Paper className={classes.modal}>
+                <Typography variant="body1" color="primary">
+                How many tokens would you like to unstake?
+                </Typography>
                 <TextField 
                   required 
                   type="number" 
@@ -58,14 +61,16 @@ function StakingContainer() {
                   placeholder="0" 
                   value={unstakeAmount} 
                 />
-                <BasicButton onClick={onClick} whiteTheme title="Initiate Unstaking" />
+                <BasicButton onClick={onClick} color="white" title="Initiate Unstaking" />
               </Paper>
             ) : (
               <Paper>
-                <Typography variant="body1" color="primary" style={{ padding: "2%" }}>
+                <Box padding="2%">
+                <Typography variant="body1" color="primary">
                   Are you sure you would like to unstake { unstakeAmount } tokens?
                 </Typography>
-                <div className={commonClasses.centeredBox} style={{ flexDirection: "row" }}>
+                </Box>
+                <Box display="flex" alignItems="center" justifyContent="center" flexDirection="row">
                   <Typography 
                     onClick={onCancel} 
                     variant="body1" color="primary" 
@@ -73,35 +78,35 @@ function StakingContainer() {
                   >
                     Cancel
                   </Typography>
-                  <BasicButton whiteTheme title="Yes, Initiate Unstake" />
-                </div>
+                  <BasicButton color="white" title="Yes, Initiate Unstake" onClick={onCancel} />
+                </Box>
               </Paper>
             )          
           }
-        </div>
+        </Box>
       </Modal>
     )
   }
 
   return (
-    <div className={commonClasses.marginContainer} style={{ width: "50%" }}>
-      <div className={commonClasses.titleWithButton}>
+    <Box width="50%" marginTop="6%">
+      <Box display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="body1" color="secondary">Staking</Typography>
-        <BasicButton title="+ Stake" />
-      </div>
-      <div className={commonClasses.borderContainer} style={{ padding: "5%" }}> 
-        <div className={commonClasses.centeredBox}>
-          <Typography variant="body1" color="textSecondary" style={{ padding: "2%" }}>Staked</Typography>
-          <Typography variant="h2" color="secondary" style={{ padding: "2%" }}>0</Typography>
-          <Typography variant="body1" color="textSecondary" style={{ padding: "2%" }}>Unstaked</Typography>
-          <Typography variant="h2" color="secondary" style={{ padding: "2%" }}>0</Typography>
-        </div>
-        <div className={commonClasses.leftBox}>
+        <BasicButton color="black" title="+ Stake" />
+      </Box>
+      <Box className={commonClasses.borderContainer} padding="5%"> 
+        <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" className={classes.paddingBox}>
+          <Typography variant="body1" color="textSecondary">Staked</Typography>
+          <Typography variant="h2" color="secondary">0</Typography>
+          <Typography variant="body1" color="textSecondary">Unstaked</Typography>
+          <Typography variant="h2" color="secondary">0</Typography>
+        </Box>
+        <Box display="flex" justifyContent="flex-end">
           <Typography variant="body1" color="secondary" style={{ textDecoration: "underline "}} onClick={() => setUnstakeModal(true)}>Initiate Unstake</Typography>
           <UnstakeModal />
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 

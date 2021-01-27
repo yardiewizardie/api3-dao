@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 import { Chart, PieSeries } from '@devexpress/dx-react-chart-material-ui';
 import { Animation, Palette } from '@devexpress/dx-react-chart';
 
@@ -18,8 +18,8 @@ function InsurancePool(props: any) {
     ];
 
     return (
-      <div className={commonClasses.marginContainer}>
-        <div className={commonClasses.titleWithButton}>
+      <Box marginTop="6%">
+        <Box display="flex" justifyContent="space-between" alignItems="center">
           <Typography variant="body1" color="secondary">Insurance Pool</Typography>
           { 
             props.walletConnected && 
@@ -27,28 +27,30 @@ function InsurancePool(props: any) {
               How This Works
             </Typography>
           }
-        </div>
-        <div className={commonClasses.borderContainer}> 
-        <div className={classes.insurancePoolContainer}>
-        <div className={commonClasses.centeredBox} style={{ padding: "1%" }}>
+        </Box>
+        <Box className={commonClasses.borderContainer}> 
+        <Box display="flex" flexDirection="row" justifyContent="space-around" alignItems="center" padding="1%">
+        <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" padding="1%">
         <Typography variant="h3" color="textSecondary" className={classes.subTitle}>Annual Rewards (APY)</Typography>
         <Typography variant="h1" color="secondary">10%</Typography>
 
         <Typography variant="h3" color="textSecondary" className={classes.subTitle}>Annual Inflation Rate</Typography>
         <Typography variant="h1" color="secondary">2%</Typography>
-        </div>
-        <div className={commonClasses.centeredBox} style={{ padding: "1%" }}>
+        </Box>
+        <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" padding="1%">
         <Typography variant="subtitle2" color="textSecondary" className={classes.subTitle}>TOTAL STAKED</Typography>
-        <Typography variant="h2" color="secondary" style={{ paddingBottom: "35%" }}>8,540,000</Typography>
+        <Box paddingBottom="35%">
+          <Typography variant="h2" color="secondary">8,540,000</Typography>
+        </Box>
 
         <Typography variant="subtitle2" color="textSecondary" className={classes.subTitle}>STAKING TARGET</Typography>
         <Typography variant="h2" color="secondary">10,000,000</Typography>
-        </div>
-        <div className={commonClasses.centeredBox} style={{ padding: "1%" }}>
-        <div className={classes.innerChartText}>
+        </Box>
+        <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" padding="1%">
+        <Box className={classes.innerChartText}>
         <Typography variant="h1" color="secondary">85.4%</Typography>
         <Typography variant="subtitle2" color="textSecondary" className={classes.subTitle}>OF TARGET MET</Typography>
-        </div>
+        </Box>
         <Chart
           data={ChartData}
           width={172}
@@ -62,10 +64,10 @@ function InsurancePool(props: any) {
           />
           <Animation />
         </Chart>
-        </div>
-        </div>
-        </div>
-      </div>
+        </Box>
+        </Box>
+        </Box>
+      </Box>
     )
 }
 

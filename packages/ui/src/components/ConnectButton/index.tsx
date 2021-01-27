@@ -17,7 +17,7 @@ function ConnectButton() {
     api3Context.setTokens(tokens);
   }
 
-  return <BasicButton onClick={connect} title="Connect Wallet" />
+  return <BasicButton color="black" onClick={connect} title="Connect Wallet" />
 }
 
 export default ConnectButton;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   Button,
+  Box
 } from "@material-ui/core";
 
 import useStyles from "components/Staking/StakingButton/styles";
@@ -19,13 +20,13 @@ function StakingButton(props?: any) {
   }
   
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <Button color="inherit" className={classes.root} onClick={stake}>
         { 
           submitting ? "Staking tokens..." : "Stake Tokens" 
         }
       </Button>
-    </div>
+    </Box>
   );
 }
 

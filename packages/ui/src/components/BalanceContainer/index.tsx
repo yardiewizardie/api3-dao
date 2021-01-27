@@ -1,31 +1,32 @@
 import React from 'react';
 import { BasicButton } from "components"
 
-import { Typography } from '@material-ui/core';
+import { Typography, Box } from '@material-ui/core';
 
-// import useStyles from "components/BalanceContainer/styles";
+import useStyles from "components/BalanceContainer/styles";
 import useCommonStyles from "styles/common-styles";
 
 function BalanceContainer() { 
+    const classes = useStyles();
     const commonClasses = useCommonStyles();
 
-    return (<div className={commonClasses.marginContainer} style={{ width: "50%", marginRight: "48px" }}>
-        <div className={commonClasses.titleWithButton}>
+    return (<Box marginTop="6%" width="50%" marginRight="10%" >
+        <Box display="flex" justifyContent="space-between" alignItems="center">
             <Typography variant="body1" color="secondary">Balance</Typography>
-            <BasicButton title="+ Deposit" />
-        </div>
-        <div className={commonClasses.borderContainer} style={{ padding: "5%" }}> 
-            <div className={commonClasses.centeredBox}>
-                <Typography variant="body1" color="textSecondary" style={{ padding: "2%" }}>Total</Typography>
-                <Typography variant="h2" color="secondary" style={{ padding: "2%" }}>0</Typography>
-                <Typography variant="body1" color="textSecondary" style={{ padding: "2%" }}>Withdrawable</Typography>
-                <Typography variant="h2" color="secondary" style={{ padding: "2%" }}>0</Typography>
-            </div>
-            <div className={commonClasses.leftBox}>
+            <BasicButton color="black" title="+ Deposit" />
+        </Box>
+        <Box className={commonClasses.borderContainer} padding="5%"> 
+            <Box className={classes.paddingBox} display="flex" alignItems="center" justifyContent="center" flexDirection="column">
+                <Typography variant="body1" color="textSecondary">Total</Typography>
+                <Typography variant="h2" color="secondary">0</Typography>
+                <Typography variant="body1" color="textSecondary" >Withdrawable</Typography>
+                <Typography variant="h2" color="secondary">0</Typography>
+            </Box>
+            <Box display="flex" justifyContent="flex-end">
                 <Typography variant="body1" color="secondary" style={{ textDecoration: "underline "}}>Withdraw</Typography>
-        </div>
-      </div>
-        </div>)
+        </Box>
+      </Box>
+        </Box>)
 
 }
 

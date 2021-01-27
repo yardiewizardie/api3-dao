@@ -26,6 +26,11 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     cancelButton: {
       padding: "10%"
+    },
+    paddingBox: {
+      "& > *": {
+        padding: "2%"
+      }
     }
   })
 );

@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
 import { 
   Box, 
-  Typography, 
-  // Grid,
+  Typography,
 } from '@material-ui/core';
 import { InsurancePool, BalanceContainer, StakingContainer  } from "components";
 
@@ -32,17 +31,17 @@ function API3Stats() {
     return (
       <Box className={classes.root}>
         <Typography variant="h1" color="textSecondary" className={commonClasses.textBackground}>Dashboard</Typography>
-          <div className={commonClasses.mainTitleContainer}>
-            <Typography variant="subtitle2" color="textSecondary" style={{ color: "#878888" }}>Dashboard</Typography>
+          <Box marginLeft="32px">
+            <Typography variant="subtitle2" color="textSecondary">Dashboard</Typography>
             <Typography variant="h2" color="secondary">User Address</Typography>
-          </div>
-          <div className={commonClasses.marginContainer}>
+          </Box>
+          <Box marginTop="6%">
             <InsurancePool walletConnected />
-          </div>
-          <div style={{ display: "flex" }}>
+          </Box>
+          <Box display="flex">
             <BalanceContainer />
             <StakingContainer />
-          </div>
+          </Box>
         {/* <Grid container justify="space-evenly" spacing={2}>
           <Grid>
             <Global />
