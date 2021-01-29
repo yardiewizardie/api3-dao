@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Typography, Modal, Paper, TextField, Box } from "@material-ui/core";
+import { Typography, Modal, Paper, TextField, Box} from "@material-ui/core";
 
-import { BasicButton } from "components"
+import CloseIcon from '@material-ui/icons/Close';
+import { BasicButton , Counter } from "components"
 import useStyles from "components/Staking/StakingContainer/styles";
 import useCommonStyles from "styles/common-styles";
 
@@ -9,9 +10,13 @@ function StakingContainer() {
   const classes = useStyles();
   const commonClasses = useCommonStyles();
   const [modal, setUnstakeModal] = useState(false);
+  const [unstakeAmount, setUnstakeAmount] = useState(0);
+  const [actualUnstakeAmount, setActualUnstakeAmount ] = useState(0);
+  const [unstakeStatus, setUnstakeStatus] = useState(false);
+  const [unstakeTime, setUnstakeTime] = useState(0);
+  const [unstakeAvailable, setUnstakeAvailalbe] = useState(true);
 
   const UnstakeModal = () => {
-    const [unstakeAmount, setUnstakeAmount] = useState(0);
     const [nextTabModal, setTabModal] = useState(false);
     
     const changeTabModal = (tab: boolean, amount: number) => { 
@@ -46,6 +51,10 @@ function StakingContainer() {
         aria-describedby="simple-modal-description"
       >
         <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" height="100%">
+        <Box onClick={onClose} marginLeft="23%">
+          <CloseIcon color="secondary" fontSize="large" />
+        </Box>
+        <Box>
           { 
             !nextTabModal ? (
               <Paper className={classes.modal}>
@@ -78,11 +87,12 @@ function StakingContainer() {
                   >
                     Cancel
                   </Typography>
-                  <BasicButton color="white" title="Yes, Initiate Unstake" onClick={onCancel} />
+                  <BasicButton color="white" title="Yes, Initiate Unstake" onClick={() => {onCancel(); setActualUnstakeAmount(unstakeAmount); setUnstakeTime(new Date().setDate(new Date().getDate() + 6)); setUnstakeStatus(true)}} />
                 </Box>
               </Paper>
             )          
           }
+        </Box>
         </Box>
       </Modal>
     )
@@ -94,7 +104,7 @@ function StakingContainer() {
         <Typography variant="body1" color="secondary">Staking</Typography>
         <BasicButton color="black" title="+ Stake" />
       </Box>
-      <Box className={commonClasses.borderContainer} padding="5%"> 
+      <Box className={commonClasses.borderContainer} padding="5%" style={{ marginBottom: "0px" }} > 
         <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" className={classes.paddingBox}>
           <Typography variant="body1" color="textSecondary">Staked</Typography>
           <Typography variant="h2" color="secondary">0</Typography>
@@ -106,6 +116,28 @@ function StakingContainer() {
           <UnstakeModal />
         </Box>
       </Box>
+      {unstakeStatus && <Box padding="-5%" className={classes.unstakeContainer}>
+        <Box padding="5%">
+          <Typography variant="subtitle2" color="textSecondary">Pending API3 tokens unstaking</Typography>
+        </Box>
+        <Box display="flex" justifyContent="space-between" alignItems="center" padding="0 5%" paddingBottom="2%">
+          <Box display="flex" justifyContent="center" flexDirection="column" margin="0 16px">
+          <Typography variant="subtitle2" color="secondary">Amount</Typography>
+          <Typography variant="h2" color="secondary">{ actualUnstakeAmount }</Typography>
+          </Box>
+          <Box display="flex" justifyContent="center" flexDirection="column" margin="16px">
+          <Typography variant="subtitle2" color="secondary">Cooldown</Typography>
+            <Counter countDownDate={unstakeTime} />
+          </Box>
+        </Box>
+        <Box display="flex" justifyContent="space-around"  alignItems="center" paddingBottom="10%">
+            <Typography variant="subtitle2" color="secondary" style={{ textDecoration: "underline" }}>Unstake & Withdraw</Typography>
+            <BasicButton color="black" title="Unstake" disabled={unstakeTime !== 0}/>
+          </Box>
+        <Box display="flex" justifyContent="center" alignItems="center" paddingBottom="5%">
+        {unstakeAvailable && <Typography variant="subtitle2" color="secondary">You have 6 days 5 hours 30 min 2 sec remaining to unstake.</Typography>}
+        </Box>
+      </Box>}
     </Box>
   );
 }

@@ -31,6 +31,9 @@ export const useStyles = makeStyles((theme: Theme) =>
       "& > *": {
         padding: "2%"
       }
+    },
+    unstakeContainer: {
+      backgroundColor: "#181818"
     }
   })
 );

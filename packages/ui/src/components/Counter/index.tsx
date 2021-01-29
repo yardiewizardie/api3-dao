@@ -1,13 +1,13 @@
 import React, { useState, useEffect }  from "react";
-
+import { Typography, Box } from "@material-ui/core";
 import { counter } from "utils/time";
 
-// import useStyles from "components/Navbar/styles";
+import useStyles from "./styles";
 
 function Counter(props: any) {
-  // const classes = useStyles();
+  const classes = useStyles();
   const { countDownDate: date } = props
-  const start = "00:00:00"
+  const start = "00:00:00:00"
   let [time, setTimer] = useState<string | number>(start)
 
   const componentDidMount = () => {
@@ -41,7 +41,15 @@ function Counter(props: any) {
 
   return (
     <>
+      <Typography variant="h2" color="secondary">
       { time }
+      </Typography>
+      <Box className={classes.timeText} paddingLeft="5%" display="flex">
+      <Typography variant="subtitle2" color="textSecondary">D</Typography>
+      <Typography variant="subtitle2" color="textSecondary">HR</Typography>
+      <Typography variant="subtitle2" color="textSecondary">MIN</Typography>
+      <Typography variant="subtitle2" color="textSecondary">SEC</Typography>
+      </Box>
     </>
   );
 }

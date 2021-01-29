@@ -1,6 +1,6 @@
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 interface Props {
-  color: 'black' | 'white';
+  color: 'black' | 'white' | 'disabled' ;
 }
 
 export const useStyles = makeStyles((theme: Theme) =>
@@ -8,10 +8,10 @@ export const useStyles = makeStyles((theme: Theme) =>
     root: {
     },
     button: (props: Props ) => ({
-      backgroundColor: props.color === "black" ? "#000": "#FFFFFF" ,
-      border: props.color === "black" ? "1px solid #878888" : "1px solid #000",
+      backgroundColor: props.color === "black" ? "#000": props.color === "white" ? "#FFFFFF" : "#292929" ,
+      border: props.color === "black" ? "1px solid #878888" : props.color === "white" ? "1px solid #000" : "1px solid #383838",
       padding: "16px 28px",
-      color: props.color === "black" ? "#fff" : "#000",
+      color: props.color === "black" ? "#fff" : props.color === "white" ? "#000" : "#383838",
       fontSize: "18px",
       fontWeight: 400,
       width: "100%",

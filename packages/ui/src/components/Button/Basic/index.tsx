@@ -12,7 +12,7 @@ function BasicButton(props: any) {
   const firstSpan = whiteTheme ? classes.whiteFirstSpan : classes.firstSpan; */
   return (
     <Box>
-      <button color={color} onClick={onClick} className={classes.button}>
+      <button color={props.disabled ? 'disabled': color} onClick={onClick} className={classes.button} disabled={props.disabled}>
         { title }
       </button>
       <span color={color} className={classes.firstSpan} />

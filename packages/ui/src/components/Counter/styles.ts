@@ -12,6 +12,11 @@ export const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    timeText: {
+      "& > *": {
+        paddingRight: "16%"
+      }
+    }
   }),
 );
 
