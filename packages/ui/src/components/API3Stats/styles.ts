@@ -9,6 +9,10 @@ export const useStyles = makeStyles((theme: Theme) =>
     box: {
       padding: 10
     },
+    unstakeAvailableContainer: {
+      border: "1px solid #7CE3CB",
+      borderRadius: "2px",
+    }
   }),
 );
 

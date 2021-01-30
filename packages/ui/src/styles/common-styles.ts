@@ -9,7 +9,7 @@ export const useCommonStyles = makeStyles((theme: Theme) =>
     textBackground: {
         position: "absolute",
         color: "#191919",
-        zIndex: -900,
+        zIndex: -20,
         fontSize: 131,
         fontWeight: 500
     },
