@@ -10,8 +10,7 @@ import { AragonContext } from "contexts";
 import { Vote } from "services/aragon/types";
 import { 
   VoteProposalButtons,
-  // Counter,
-
+  ProposalItem
 } from "components";
 import useStyles from "components/VotesList/styles";
 
@@ -21,8 +20,8 @@ function VotesList() {
   
   const voteItems = (vote: Vote, voteIndex: number) => {
     voteIndex = Number(vote.id.slice(- 4))
-    return (
-      <Box className={classes.voteItem} key={voteIndex}>
+    return <ProposalItem vote={vote} voteIndex={voteIndex} />
+     /*  <Box className={classes.voteItem} key={voteIndex}>
         <Link to={`proposals/${voteIndex}`}>
           <Box>
             <Typography variant="body1">Vote #: { voteIndex }</Typography>
@@ -36,22 +35,18 @@ function VotesList() {
           <Box>
             <Counter countDownDate="Jan 1, 2021 00:00:00" />
           </Box>
-          */}
+          *
         </Link>
         <VoteProposalButtons voteIndex={voteIndex} proposalType="vote"/>
-      </Box>
-    )
+      </Box> */
+    
   }
     
   return (
     <>
       { 
-        aragonContext.votes.length > 0 ? (
-          <Typography variant="h5" className={classes.voteListTitle}>
-            Vote List
-          </Typography>
-        )
-        : (
+        aragonContext.votes.length < 0 &&
+         (
           <Typography variant="h5" className={classes.voteListTitle}>
             Loading vote proposals...
           </Typography>

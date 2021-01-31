@@ -1,6 +1,7 @@
 import Navbar from "components/Navbar";
 import Sidebar from "components/Navbar/Sidebar";
 import BasicButton from "components/Button/Basic";
+import ProposalItem from "components/Proposals/ProposalItem";
 import ConnectButton from "components/ConnectButton";
 import AddressInfo from "components/AddressInfo";
 import { API3Stats, Account, Global, API3InsuranceStats } from "components/API3Stats";
@@ -38,5 +39,6 @@ export {
   Logo,
   InsurancePool,
   BalanceContainer,
-  StakingContainer
+  StakingContainer,
+  ProposalItem
 }
