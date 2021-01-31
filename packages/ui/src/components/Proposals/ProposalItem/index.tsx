@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Box,
   Typography
@@ -14,6 +15,7 @@ import WarningIcon from '@material-ui/icons/Warning';
 import CloseIcon from '@material-ui/icons/Close';
 import DoneIcon from '@material-ui/icons/Done';
 import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 
 import useStyles from "components/Proposals/ProposalItem/styles";
@@ -22,13 +24,18 @@ function ProposalItem(props: any) {
   const classes = useStyles(props);
     console.log(props)
 
+    let total = parseInt(props.vote.yea + props.vote.no);
+    let percentageYes = parseInt(props.vote.yea) / total * 100;
+    let percentageNo = parseInt(props.vote.no) / total * 100;
+
     const data = [
-        { year: '1950', population: 2.525,  },
-        { ear: '1960', pop: 3.018 },
+        { label: 'yes', yes: 0 }, // for some reason they are inverted
+        { label: 'no', no: 100 }, 
       ];
 
   return (
-    <Box className={classes.proposalitem} padding="16px" display="flex">
+    <Link to={`proposals/${props.voteIndex}`} style={{ textDecoration: "none"}}>
+    <Box className={classes.proposalitem} padding="16px" display="flex" justifyContent="space-between">
         <Box width="50%">
         <Typography variant="body1" color="secondary">Vote #: { props.voteIndex }</Typography>
         <Box display="flex" justifyContent="space-between">
@@ -57,27 +64,47 @@ function ProposalItem(props: any) {
         </Box>
         </Box>
         </Box>
-        <Box display="block">
+        <Box display="flex">
+        <Box>
+            <Box display="flex" justifyContent="center" alignItems="center">
+                <DoneIcon color="secondary" fontSize="small" />
+                <Typography variant="subtitle2" color="secondary">{100}%</Typography>
+            </Box>
+            <Box display="flex" justifyContent="center" alignItems="center">
+                <CloseIcon color="secondary" fontSize="small" />
+                <Typography variant="subtitle2" color="secondary">{0}%</Typography>
+            </Box>
+        </Box>
+        <Box display="block" marginTop="-8px">
         <Chart
           data={data}
           rotated
-          height={60}
-          width={120}
+          height={50}
+          width={100}
         >
-          <Palette scheme={['#FFFFFF', '#7CE3CB', '#00C853', '#FFEB3B', '#FF4081', '#E040FB']} />
+            {!props.vote.executed ? <Palette scheme={['#FFFFFF', '#FFFFFF', '#00C853', '#FFEB3B', '#FF4081', '#E040FB']} />
+        : props.vote.executed && parseInt(props.vote.yea) > parseInt(props.vote.nay) ? 
+            <Palette scheme={['#878888', '#7CE3CB', '#00C853', '#FFEB3B', '#FF4081', '#E040FB']} />
+        :
+        <Palette scheme={['#823FB1', '#878888', '#00C853', '#FFEB3B', '#FF4081', '#E040FB']} />
+        }
           <BarSeries
-            valueField="population"
-            argumentField="year"
+            valueField="yes"
+            argumentField="label"
           />
            <BarSeries
-            valueField="pop"
-            argumentField="ear"
+            valueField="no"
+            argumentField="label"
           />
           <Animation />
         </Chart>
         </Box>
-
+        </Box>
+        <Box display="flex" alignItems="center" justifyContent="center">
+            <KeyboardArrowRightIcon color="secondary" fontSize="large" />
+        </Box>
     </Box>
+    </Link>
   );
 }
 

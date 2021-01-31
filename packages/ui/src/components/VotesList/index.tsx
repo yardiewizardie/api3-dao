@@ -56,6 +56,11 @@ function VotesList() {
         {
           aragonContext.votes.map(voteItems).slice(0, 5)
         }
+         <Link to="/proposals" style={{ textDecoration: "none"}}>
+        <Box display="flex" justifyContent="center" alignItems="center" padding="3%">
+            <Typography variant="subtitle2" color="textSecondary">View All Proposals</Typography>
+        </Box>
+        </Link>
       </Box>
 
     </>

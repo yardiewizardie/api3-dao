@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme: Theme) =>
     root: {
     },
     proposalitem: {
-        borderBottom: "1px solid #404040"
+        borderBottom: "1px solid #404040",
     },
     rejectIcon: {
         color: "#823FB1",
