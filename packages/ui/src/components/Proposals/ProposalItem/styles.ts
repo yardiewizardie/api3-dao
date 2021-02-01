@@ -6,18 +6,18 @@ export const useStyles = makeStyles((theme: Theme) =>
     root: {
     },
     proposalitem: {
-      borderBottom: "1px solid #404040"
+        borderBottom: "1px solid #404040",
     },
-    reject: {
-      color: "#823FB1",
-      paddingRight: "3px"
+    rejectIcon: {
+        color: "#823FB1",
+        paddingRight: "3px"
     },
-    done: {
-      paddingRight: "3px",
-      color: theme.palette.info.main,
+    doneIcon: {
+        paddingRight: "3px",
+        color: theme.palette.info.main
     },
-    active: {
-      paddingRight: "3px",
+    activeIcon: {
+        paddingRight: "3px"
     }
   }),
 );
