@@ -33,7 +33,7 @@ function ProposalItem(props: any) {
       ];
 
   return (
-    <Link to={`proposals/${props.voteIndex}`} style={{ textDecoration: "none"}}>
+    <Link to={{ pathname: `/proposals/${props.voteIndex}`, state: props }} style={{ textDecoration: "none"}}>
     <Box className={classes.proposalitem} padding="16px" display="flex" justifyContent="space-between">
         <Box width="50%">
         <Typography variant="body1" color="secondary">Vote #: { props.voteIndex }</Typography>

@@ -2,15 +2,38 @@ import React, {
   // useContext, 
   // useEffect 
 } from 'react';
-import { Container } from '@material-ui/core';
+import { useLocation } from "react-router-dom";
+import { Container, Typography, Box } from '@material-ui/core';
+import { BasicButton, Counter } from "components";
 
 // import Aragon from "services/aragon";
 // import { AragonContext } from "contexts";
 
-import useStyles from "containers/dashboard/styles";
+import useStyles from "containers/proposal/details/styles";
+import useCommonStyles from "styles/common-styles";
+import WarningIcon from '@material-ui/icons/Warning';
+import CloseIcon from '@material-ui/icons/Close';
+import DoneIcon from '@material-ui/icons/Done';
+import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+
+interface StateProps {
+  state: {
+    vote: {
+      executed: boolean;
+      yea: string;
+      nay: string;
+      startDate: string;
+    }
+    voteIndex: string; 
+  }
+}
 
 function ProposalDetails() {
   const classes = useStyles();
+  const commonClasses = useCommonStyles();
+  let { state } : StateProps = useLocation();
+  let { vote, voteIndex } = state;
   // const aragonContext = useContext<any>(AragonContext);
 
   // const componentDidMount = () => {
@@ -25,11 +48,54 @@ function ProposalDetails() {
   
   return (
     <Container className={classes.root}>
-      Here we display details of and individual proposals. 
-      
-      User here will vote for proposal either "For" or "Against" or Change Vote.
-      
-      Delegate voting to another address(popup).
+      <Box display="flex" justifyContent="space-between">
+        <Typography variant="h1" color="textSecondary" className={commonClasses.textBackground}>Proposals</Typography>
+            <Box marginLeft="32px">
+              <Typography variant="subtitle2" color="textSecondary">Proposals</Typography>
+        <Typography variant="h2" color="secondary">Proposals {voteIndex}</Typography>
+            </Box>
+        <Box display="flex" justifyContent="center" flexDirection="column" margin="16px" width="12%">
+            <Counter countDownDate={new Date().setDate(new Date().getDate() + 6)} />
+        </Box>
+        </Box>
+        <Box display="flex" justifyContent="space-between">
+        <Box marginLeft="32px" display="flex" justifyContent="space-between" width="24%">
+        {!vote.executed ? 
+            <Box display="flex" alignItems="center"> 
+                <WarningIcon className={classes.activeIcon} color="secondary" fontSize="small" />
+                <Typography variant="subtitle2" color="secondary">Active</Typography>
+            </Box>
+        : vote.executed && parseInt(vote.yea) > parseInt(vote.nay) ? 
+            <Box display="flex" alignItems="center"> 
+                <DoneIcon className={classes.doneIcon} fontSize="small" />
+                <Typography variant="subtitle2" className={classes.doneIcon}>Passed</Typography>
+            </Box >
+        :
+            <Box display="flex" alignItems="center"> 
+                <CloseIcon className={classes.rejectIcon} fontSize="small" />
+                <Typography variant="subtitle2" color="secondary" className={classes.rejectIcon}>Rejected</Typography>
+            </Box>
+        }
+        <Box display="flex">
+            <Typography variant="subtitle2" className={classes.activeIcon} color="textSecondary">00</Typography>
+            <ChangeHistoryIcon style={{ color: "#4A4A4A" }}  fontSize="small" />
+        </Box>
+        <Box>
+            <Typography variant="subtitle2" className={classes.activeIcon} color="textSecondary">{new Date(parseInt(vote.startDate)).toLocaleString()}</Typography>
+        </Box>
+        </Box>
+        <Box>
+          <Typography variant="subtitle2" className={classes.activeIcon} color="textSecondary">Remaining</Typography>
+        </Box>
+        </Box>
+        <Box marginTop="6%" display="flex">
+          <Box>
+            <BasicButton title="Vote" color="black" />
+          </Box>
+          <Box>
+
+          </Box>
+        </Box>
     </Container>
   );
 }

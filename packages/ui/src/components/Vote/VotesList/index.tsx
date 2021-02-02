@@ -41,7 +41,7 @@ function VotesList() {
         }
       </Box>
       <Link to="/proposals" style={{ textDecoration: "none"}}>
-        <Box display="flex" justifyContent="center" alignItems="center" padding="3%">
+        <Box display="flex" justifyContent="center" alignItems="center" padding="2.5%">
           <Typography variant="subtitle2" color="textSecondary">View All Proposals</Typography>
         </Box>
       </Link>

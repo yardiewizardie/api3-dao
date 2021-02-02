@@ -9,6 +9,17 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     box: {
       padding: 10
+    },
+    rejectIcon: {
+      color: "#823FB1",
+      paddingRight: "3px"
+    },
+    doneIcon: {
+        paddingRight: "3px",
+        color: theme.palette.info.main
+    },
+    activeIcon: {
+        paddingRight: "3px"
     }
   }),
 );
