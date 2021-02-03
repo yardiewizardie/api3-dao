@@ -20,6 +20,11 @@ export const useStyles = makeStyles((theme: Theme) =>
     },
     activeIcon: {
         paddingRight: "3px"
+    },
+    proposalSubtitle: {
+      "& > *": {
+        paddingRight: "4%",
+      }
     }
   }),
 );

@@ -59,21 +59,21 @@ function ProposalDetails() {
         </Box>
         </Box>
         <Box display="flex" justifyContent="space-between">
-        <Box marginLeft="32px" display="flex" justifyContent="space-between" width="24%">
+        <Box marginLeft="32px" display="flex" width="100%" className={classes.proposalSubtitle}>
         {!vote.executed ? 
             <Box display="flex" alignItems="center"> 
                 <WarningIcon className={classes.activeIcon} color="secondary" fontSize="small" />
-                <Typography variant="subtitle2" color="secondary">Active</Typography>
+                <Typography variant="body1" color="secondary">Active</Typography>
             </Box>
         : vote.executed && parseInt(vote.yea) > parseInt(vote.nay) ? 
             <Box display="flex" alignItems="center"> 
                 <DoneIcon className={classes.doneIcon} fontSize="small" />
-                <Typography variant="subtitle2" className={classes.doneIcon}>Passed</Typography>
+                <Typography variant="body1" className={classes.doneIcon}>Passed</Typography>
             </Box >
         :
             <Box display="flex" alignItems="center"> 
                 <CloseIcon className={classes.rejectIcon} fontSize="small" />
-                <Typography variant="subtitle2" color="secondary" className={classes.rejectIcon}>Rejected</Typography>
+                <Typography variant="body1" color="secondary" className={classes.rejectIcon}>Rejected</Typography>
             </Box>
         }
         <Box display="flex">
@@ -88,12 +88,18 @@ function ProposalDetails() {
           <Typography variant="subtitle2" className={classes.activeIcon} color="textSecondary">Remaining</Typography>
         </Box>
         </Box>
-        <Box marginTop="6%" display="flex">
+        <Box marginTop="6%" display="flex" justifyContent="space-between">
           <Box>
             <BasicButton title="Vote" color="black" />
           </Box>
-          <Box>
-
+          <Box display="flex" flexDirection="column" justifyContent="center" alignItems="flex-end">
+            <Box display="flex">
+            <Typography variant="body1"  color="secondary">0.1%  My Voting Weight</Typography>
+            <HelpOutlineIcon color="secondary" fontSize="small" />
+            </Box>
+            <Box>
+              <Typography variant="body1"  color="secondary" style={{ textDecoration: "underline" }}>Delegate My Votes</Typography>
+            </Box>
           </Box>
         </Box>
     </Container>
