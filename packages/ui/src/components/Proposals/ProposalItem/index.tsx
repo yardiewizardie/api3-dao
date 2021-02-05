@@ -11,11 +11,7 @@ import {
 
 import { Animation, Palette } from '@devexpress/dx-react-chart';
 
-import WarningIcon from '@material-ui/icons/Warning';
-import CloseIcon from '@material-ui/icons/Close';
-import DoneIcon from '@material-ui/icons/Done';
-import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import { WarningIcon, CloseIcon, DoneIcon, ChangeHistoryIcon, KeyboardArrowRightIcon  } from "components/@material-icons"
 
 
 import useStyles from "components/Proposals/ProposalItem/styles";

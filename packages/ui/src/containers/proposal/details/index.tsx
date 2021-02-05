@@ -8,15 +8,15 @@ import { BasicButton, Counter } from "components";
 
 // import Aragon from "services/aragon";
 // import { AragonContext } from "contexts";
+import {
+  Chart,
+  BarSeries,
+} from '@devexpress/dx-react-chart-material-ui';
+import { Animation, Palette } from '@devexpress/dx-react-chart';
 
 import useStyles from "containers/proposal/details/styles";
 import useCommonStyles from "styles/common-styles";
-import WarningIcon from '@material-ui/icons/Warning';
-import CloseIcon from '@material-ui/icons/Close';
-import DoneIcon from '@material-ui/icons/Done';
-import ChangeHistoryIcon from '@material-ui/icons/ChangeHistory';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-
+import { WarningIcon, CloseIcon, DoneIcon, ChangeHistoryIcon, HelpOutlineIcon  } from "components/@material-icons"
 interface StateProps {
   state: {
     vote: {
@@ -28,6 +28,12 @@ interface StateProps {
     voteIndex: string; 
   }
 }
+
+
+const data = [
+  { label: 'yes', yes: 0 }, // for some reason they are inverted
+  { label: 'no', no: 100 }, 
+];
 
 function ProposalDetails() {
   const classes = useStyles();
@@ -45,7 +51,6 @@ function ProposalDetails() {
   //   getVotes()
   // }
   // useEffect(componentDidMount, [aragonContext]);
-  
   return (
     <Container className={classes.root}>
       <Box display="flex" justifyContent="space-between">
@@ -102,6 +107,79 @@ function ProposalDetails() {
             </Box>
           </Box>
         </Box>
+        <Box marginTop="3%" display="flex" justifyContent="space-between">
+            <Box className={commonClasses.borderContainer} padding="2%" width="50%" style={{ marginRight: '20px' }}>
+              <Box display="flex" justifyContent="space-between">
+              <Box>
+                <Typography variant="h2"  color="secondary">For</Typography>
+              </Box>
+              <Box display="flex" justifyContent="space-between" width="30%">
+                <Typography variant="body1" color="secondary">60,000 tokens</Typography>
+                <Typography variant="body1" color="secondary">80%</Typography>
+              </Box>
+            </Box>
+            <Box margin="1%" marginTop="3%" display="flex" justifyContent="space-between" alignItems="center">
+              <DoneIcon className={classes.doneIcon} fontSize="large" />
+              <Box display="block" marginTop="-8px" className={commonClasses.borderContainer} width="90%">
+                <Chart
+                  data={data}
+                  rotated
+                  height={30}
+                  width={500}
+                >
+                  <Palette scheme={['#FFFFFF', '#FFFFFF', '#00C853', '#FFEB3B', '#FF4081', '#E040FB']} />
+                  <BarSeries
+                    valueField="yes"
+                    argumentField="label"
+                  />
+                  <Animation />
+                </Chart>
+              </Box>
+            </Box>
+            </Box>
+            <Box className={commonClasses.borderContainer} padding="2%" width="50%">
+              <Box display="flex" justifyContent="space-between">
+              <Box>
+                <Typography variant="h2"  color="secondary">Against</Typography>
+              </Box>
+              <Box  display="flex" justifyContent="space-between" width="30%">
+                <Typography variant="body1" color="secondary">15,000 tokens</Typography>
+                <Typography variant="body1" color="secondary">10%</Typography>
+              </Box>
+            </Box>
+            <Box margin="1%" marginTop="3%" display="flex" justifyContent="space-between" alignItems="center">
+              <CloseIcon className={classes.rejectIcon} fontSize="large" />
+              <Box display="block" marginTop="-8px" className={commonClasses.borderContainer} width="90%">
+                <Chart
+                  data={data}
+                  rotated
+                  height={30}
+                  width={500}
+                >
+                  <Palette scheme={['#FFFFFF', '#FFFFFF', '#00C853', '#FFEB3B', '#FF4081', '#E040FB']} />
+                  <BarSeries
+                    valueField="no"
+                    argumentField="label"
+                    />
+                  <Animation />
+                </Chart>
+              </Box>
+            </Box>
+            </Box>
+          </Box>
+          <Box marginTop="3%">
+            <Box marginBottom="2%">
+              <Typography variant="body1" color="secondary">Summary</Typography>
+            </Box>
+            <Box className={commonClasses.borderContainer} padding="4%">
+              <Typography variant="body1" color="secondary" style={{ lineHeight: "32px" }}>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+Link to discussion: _______                
+              </Typography>
+            </Box>
+          </Box>
     </Container>
   );
 }
