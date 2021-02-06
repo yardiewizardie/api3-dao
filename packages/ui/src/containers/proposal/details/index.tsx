@@ -1,6 +1,6 @@
-import React from 'react';
-import { useLocation } from "react-router-dom";
-import { Container,  Typography, Box } from "@material-ui/core";
+import React, { useState } from 'react';
+import { useLocation, Link } from "react-router-dom";
+import { Container,  Typography, Box, Modal, RadioGroup, Radio, FormControlLabel, Paper, FormControl, TextField } from "@material-ui/core";
 import {
   Chart,
   BarSeries,
@@ -8,7 +8,7 @@ import {
 import { Animation, Palette } from '@devexpress/dx-react-chart';
 
 import { BasicButton, Counter } from "components";
-import { WarningIcon, DoneIcon, HelpOutlineIcon, CloseIcon, ChangeHistoryIcon } from "components/@material-icons";
+import { WarningIcon, DoneIcon, HelpOutlineIcon, CloseIcon, ChangeHistoryIcon, ArrowBackIcon, OpenInNewIcon } from "components/@material-icons";
 
 import useCommonStyles from "styles/common-styles";
 import useStyles from "containers/proposal/details/styles";
@@ -38,15 +38,114 @@ function ProposalDetails() {
   const classes = useStyles();
   const commonClasses = useCommonStyles();
   const { state } : StateProps = useLocation();
+  const [voteModal, setVoteModal] = useState(false);
+  const [delegateModal, setDelegateModal] = useState(false);
+  const [delegateAddress, setDelegateAdress] = useState('');
+  const [voted, setVoted] = useState('');
   const { vote, voteIndex } = state;
 
   // this is hardcoded for now
   const countDownDate = new Date().setDate(new Date().getDate() + 6)
   
+  const VoteModal = () => {
+    const [whoVoted, setWhoVoted] = useState('');
+    
+    const onClose = () => {
+      setVoteModal(false);
+    }
+
+    const onSubmit = () => {
+      onClose();
+      setVoted(whoVoted);
+    }
+    
+    return (
+      <Modal
+        open={voteModal}
+        onClose={onClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+      <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" height="100%">
+        <Box onClick={onClose} marginLeft="23%">
+          <CloseIcon color="secondary" fontSize="large" />
+        </Box>
+        <Paper className={classes.modal}>
+        <Typography variant="body1" color="primary">Vote on Proposal {voteIndex}</Typography>
+        <FormControl>
+        <RadioGroup aria-label="gender" name="gender1" value={whoVoted} onChange={(e) => setWhoVoted(e.target.value)}>
+          <FormControlLabel value="for" control={<Radio />} label="For" />
+          <FormControlLabel value="against" control={<Radio />} label="Against" />
+        </RadioGroup>
+        </FormControl>
+        <Box>
+          <BasicButton title="Create Transaction" color="white" onClick={() => onSubmit()} />
+        </Box> 
+        </Paper>
+      </Box>
+      </Modal>
+    )
+  }
+
+  const DelegateModal = () => {
+    const [address, setAddress] = useState('');
+    
+    const onClose = () => {
+      setDelegateModal(false);
+    }
+    
+    const onChange = (event: any) => {
+      setAddress(event.target.value);
+    }
+
+    const onSubmit = () => {
+      onClose();
+      setDelegateAdress(address);
+    }
+    
+    return (
+      <Modal
+        open={delegateModal}
+        onClose={onClose}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+      <Box display="flex" alignItems="center" justifyContent="center" flexDirection="column" height="100%">
+        <Box onClick={onClose} marginLeft="23%">
+          <CloseIcon color="secondary" fontSize="large" />
+        </Box>
+        <Paper className={classes.delegateModal}>
+          <Box paddingTop="6%">
+            <Typography variant="body1" color="primary">Delegate my votes to:</Typography>
+          </Box>
+            <TextField 
+              required
+              onChange={onChange}  
+              placeholder="Enter user’s address here" 
+              value={address} 
+            />
+        <Box display="flex" justifyContent="flex-end">
+          <BasicButton title="Delegate Tokens" color="white" onClick={() => onSubmit()} />
+        </Box> 
+        </Paper>
+      </Box>
+      </Modal>
+    )
+  }
+
+
+
+
+
   return (
     <Container className={classes.root}>
-    
-      <Box display="flex" justifyContent="space-between">
+      <Link to="/proposals">
+        <Box display="flex" alignItems="center" marginLeft="6%">
+          <ArrowBackIcon color="secondary" fontSize="large" />
+          <Typography variant="body1" color="secondary" style={{ textDecoration: 'none' }}>Back</Typography>
+        </Box>
+      </Link>
+      <Box display="flex" justifyContent="space-between" marginTop="3%">
         <Typography variant="h1" color="textSecondary" className={commonClasses.textBackground}>Proposals</Typography>
         <Box marginLeft="32px">
           <Typography variant="subtitle2" color="textSecondary">Proposals</Typography>
@@ -58,7 +157,7 @@ function ProposalDetails() {
       </Box>
 
       <Box display="flex" justifyContent="space-between">
-        <Box marginLeft="32px" display="flex" width="100%" className={classes.proposalSubtitle}>
+        <Box marginLeft="32px" display="flex" width="100%" className={classes.proposalSubtitle} alignItems="center">
           {!vote.executed ? 
               <Box display="flex" alignItems="center"> 
                   <WarningIcon className={classes.activeIcon} color="secondary" fontSize="small" />
@@ -90,21 +189,35 @@ function ProposalDetails() {
       
       <Box marginTop="6%" display="flex" justifyContent="space-between">
         <Box>
-          <BasicButton title="Vote" color="black" />
+          <BasicButton title={voted === "" ? "Vote" : "Change Vote"} color="black" onClick={() => setVoteModal(true)} />
         </Box>
         <Box display="flex" flexDirection="column" justifyContent="center" alignItems="flex-end">
           <Box display="flex">
           <Typography variant="body1"  color="secondary">0.1%  My Voting Weight</Typography>
           <HelpOutlineIcon color="secondary" fontSize="small" />
           </Box>
-          <Box>
-            <Typography variant="body1"  color="secondary" style={{ textDecoration: "underline" }}>Delegate My Votes</Typography>
-          </Box>
+            {delegateAddress !== "" ? 
+            <Box display="flex">
+              <Typography variant="body1"  color="secondary" style={{ paddingRight: "5px"}}>{delegateAddress}</Typography>
+              <OpenInNewIcon color="secondary" fontSize="small" />
+              <Box paddingLeft="5px">
+                <Typography variant="body1"  color="secondary" style={{ textDecoration: "underline", cursor: "pointer" }}>Cancel Delegation</Typography>
+              </Box>
+            </Box> :
+            <Box onClick={() => setDelegateModal(true)}>
+            <Typography variant="body1"  color="secondary" style={{ textDecoration: "underline", cursor: "pointer" }}>Delegate My Votes</Typography>
+            </Box>
+            }
         </Box>
       </Box>
       
       <Box marginTop="3%" display="flex" justifyContent="space-between">  
-        <Box className={commonClasses.borderContainer} padding="2%" width="50%" style={{ marginRight: '20px' }}>
+        <Box 
+          className={commonClasses.borderContainer}
+          padding="2%"
+          width="50%"
+          marginRight="20px"         
+          style={voted === "for" ? { border: "3px solid #FFFFFF", marginRight: "20px" }: { marginRight: "20px" }}>
           <Box display="flex" justifyContent="space-between">
             <Box>
               <Typography variant="h2"  color="secondary">For</Typography>
@@ -121,7 +234,6 @@ function ProposalDetails() {
                 data={data}
                 rotated
                 height={30}
-                width={500}
               >
                 <Palette scheme={palleteScheme} />
                 <BarSeries
@@ -134,7 +246,11 @@ function ProposalDetails() {
           </Box>
         </Box>
         
-        <Box className={commonClasses.borderContainer} padding="2%" width="50%">
+        <Box 
+          className={commonClasses.borderContainer}
+          padding="2%"
+          width="50%"
+          style={voted === "against" ? { border: "3px solid #FFFFFF" }: {}}>
           <Box display="flex" justifyContent="space-between">
           <Box>
             <Typography variant="h2"  color="secondary">Against</Typography>
@@ -152,7 +268,6 @@ function ProposalDetails() {
               data={data}
               rotated
               height={30}
-              width={500}
             >
               <Palette scheme={palleteScheme} />
               <BarSeries
@@ -179,6 +294,8 @@ function ProposalDetails() {
             Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             Link to discussion: _______                
           </Typography>
+          <VoteModal />
+          <DelegateModal />
         </Box>
       </Box>
     </Container>
