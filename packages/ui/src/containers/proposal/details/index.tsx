@@ -8,7 +8,7 @@ import {
 import { Animation, Palette } from '@devexpress/dx-react-chart';
 
 import { BasicButton, Counter, DelegateModal, VoteModal } from "components";
-import { WarningIcon, DoneIcon, HelpOutlineIcon, CloseIcon, ChangeHistoryIcon, ArrowBackIcon, OpenInNewIcon } from "components/@material-icons";
+import { WarningIcon, DoneIcon, HelpOutlineIcon, CloseIcon, ArrowBackIcon, OpenInNewIcon, ArrowDropUpIcon } from "components/@material-icons";
 
 import useCommonStyles from "styles/common-styles";
 import useStyles from "containers/proposal/details/styles";
@@ -88,9 +88,9 @@ function ProposalDetails() {
                   <Typography variant="body1" color="secondary" className={classes.rejectIcon}>Rejected</Typography>
               </Box>
           }
-          <Box display="flex">
+          <Box display="flex" alignItems="center">
               <Typography variant="subtitle2" className={classes.activeIcon} color="textSecondary">00</Typography>
-              <ChangeHistoryIcon style={{ color: "#4A4A4A" }}  fontSize="small" />
+              <ArrowDropUpIcon style={{ color: "#4A4A4A" }}  fontSize="large" />
           </Box>    
           <Box>
               <Typography variant="subtitle2" className={classes.activeIcon} color="textSecondary">{new Date(parseInt(vote.startDate)).toLocaleString()}</Typography>
@@ -190,7 +190,6 @@ function ProposalDetails() {
               data={data}
               rotated
               height={30}
-              width={500}
             >
               <Palette scheme={palleteScheme} />
               <BarSeries

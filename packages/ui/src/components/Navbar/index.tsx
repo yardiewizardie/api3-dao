@@ -11,7 +11,6 @@ import {
 import { ConnectButton, AddressInfo, Logo } from "components"
 import { Web3Context } from "contexts"
 import useStyles from "components/Navbar/styles";
-
 import vector from "assets/icons/vector.png";
 
 // This is used for now as Topbar 
