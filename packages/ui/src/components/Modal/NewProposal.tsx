@@ -14,15 +14,23 @@ import React, {
   import { BasicButton } from "components";
   import { CloseIcon } from "components/@material-icons";
   import { useStyles, CustomSelect }from "components/Modal/styles";
+  import NumberFormat from 'react-number-format';
   
   function NewProposalModal(props: any) {
     const classes = useStyles();
     const [address, setAddress] = useState("");
     const [typeOfProposal, setTypeOfProposal ] = useState("type1");
-    const [ amount, setAmount] = useState(0);
+    const [amount, setAmount] = useState(0);
     const [typeOfToken, setTypeOfToken ] = useState("usdc");
     const [linkInfo, setLinkInfo] = useState("");
     const [otherAddress, setOtherAddress] = useState("");
+    const [stakeTarget, setStakeTarget] = useState("staketarget");
+    const [stakeAmount, setStakeAmount] = useState("0");
+    const [minAmountAPR, setMinAmountAPR] = useState();
+    const [maxAmountAPR, setMaxAmountAPR] = useState("");
+    const [updateRateAPR, setUpdateRateAPR] = useState("");
+    const [voteWeightAmount, setVoteWeightAmount] = useState("");
+
     const { setProposalModal, setDelegateAddress, newProposalModal } = props;
     
     const onClose = () => {
@@ -37,6 +45,28 @@ import React, {
       onClose();
       setDelegateAddress(address);
     }
+
+    function NumberFormatCustom(props: any) {
+      const { inputRef, onChange, ...other } = props;
+    
+      return (
+        <NumberFormat
+          {...other}
+          getInputRef={inputRef}
+          allowNegative={false}
+          onValueChange={values => {
+            onChange({
+              target: {
+                name: props.name,
+                value: values.value
+              }
+            });
+          }}
+          thousandSeparator
+          // isNumericString
+        />
+      );
+    }
     
     return (
       <Modal
@@ -49,7 +79,8 @@ import React, {
           <Box onClick={onClose} marginLeft="23%">
             <CloseIcon color="secondary" fontSize="large" />
           </Box>
-          <Paper className={typeOfToken === "other" ? classes.newProposalWithOther : classes.newProposal}>
+          <Paper className={typeOfProposal === "type2" ? classes.newProposalType2 : 
+          typeOfToken === "other" ? classes.newProposalWithOther : classes.newProposal}>
             <Box  display="flex" alignContent="center" marginBottom="56px">
                 <Box display="flex" alignItems="center" justifyContent="center">
                     <Typography variant="body1" color="primary">Proposal Type</Typography>
@@ -68,7 +99,9 @@ import React, {
                 </Select>
             </Box>
             </Box>
-            <Box display="flex" marginBottom="24px">
+            {typeOfProposal === "type1" ? 
+            <Box>
+              <Box display="flex" marginBottom="24px">
                 <Box paddingRight="6px">
                     <Typography variant="body1" color="primary">Recipient</Typography>
                 </Box>
@@ -80,6 +113,7 @@ import React, {
                 placeholder="Enter user’s address here" 
                 value={address}
                 className={classes.input}
+                InputProps={{ disableUnderline: true }}
               />
             <Box display="flex"  marginTop="36px" >
                 <Box width="65%" marginRight="24px">
@@ -91,6 +125,7 @@ import React, {
                         placeholder="1234" 
                         value={amount}
                         className={classes.input}
+                        InputProps={{ disableUnderline: true }}
                     />
                 </Box>
               </Box>
@@ -124,6 +159,7 @@ import React, {
                     placeholder="Enter token’s address" 
                     value={otherAddress}
                     className={classes.input}
+                    InputProps={{ disableUnderline: true }}
                 />
             </Box>
             }
@@ -137,8 +173,139 @@ import React, {
                     placeholder="Link to more information" 
                     value={linkInfo}
                     className={classes.input}
+                    InputProps={{ disableUnderline: true }}
                 />
             </Box>
+            </Box>
+            :
+            <Box>
+              <Box display="flex" marginBottom="24px" alignContent="center">
+                <Box paddingRight="35px" display="flex">
+                    <Typography variant="body1" color="primary">DAO Parameter to change</Typography>
+                </Box>
+                <Box width="178px">
+                <Select
+                    fullWidth
+                    labelId="stake-target-select-label"
+                    id="stake-target-select"
+                    value={stakeTarget}
+                    onChange={(e) => onChange(e, setStakeTarget)}
+                    input={<CustomSelect  />}>
+                    <MenuItem value={"staketarget"}>Stake Target</MenuItem>
+                    <MenuItem value={"minapr"}>Minimum APR</MenuItem>
+                    <MenuItem value={"maxapr"}>Maximum APR</MenuItem>
+                    <MenuItem value={"updateapr"}>APR Update Rate</MenuItem>
+                    <MenuItem value={"voteweight"}>Voting Weight</MenuItem>
+                </Select>
+                </Box>
+            </Box>
+            <Box marginTop="44px" marginBottom="80px">
+              <Box display="flex" justifyContent="space-between" marginBottom="43px">
+                  <Typography variant="body1" color="primary">Stake Target</Typography>
+                  <Box>
+                    {stakeTarget === "staketarget" ? 
+                     <TextField 
+                      required
+                      onChange={(e) => onChange(e, setStakeAmount)}  
+                      placeholder="10,000,000" 
+                      value={stakeAmount}
+                      className={classes.input}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom }}
+                    /> : <Typography variant="body1" color="primary"><NumberFormat value={stakeAmount} displayType={'text'} thousandSeparator={true} suffix={' API3'} /></Typography>
+                    }
+                  </Box>
+              </Box>
+              <Box display="flex" justifyContent="space-between" marginBottom="43px">
+                  <Typography variant="body1" color="primary">Minimum APR</Typography>
+                  <Box>
+                  {stakeTarget === "minapr" ? 
+                  <Box width="35%">
+                     <TextField 
+                      required
+                      onChange={(e) => onChange(e, setMinAmountAPR)}  
+                      placeholder={"2.5"}
+                      value={minAmountAPR}
+                      className={classes.input}
+                      type="number"
+                      InputProps={{ disableUnderline: true }}
+                    />
+                    </Box>
+                     :
+                    <Typography variant="body1" color="primary">{minAmountAPR}%</Typography>}
+                  </Box>
+              </Box>
+              <Box display="flex" justifyContent="space-between" marginBottom="43px">
+                  <Typography variant="body1" color="primary">Maximum APR</Typography>
+                  <Box>
+                  {stakeTarget === "maxapr" ? 
+                  <Box width="35%">
+                     <TextField 
+                      required
+                      onChange={(e) => onChange(e, setMaxAmountAPR)}  
+                      placeholder={"75"}
+                      value={maxAmountAPR}
+                      className={classes.input}
+                      type="number"
+                      InputProps={{ disableUnderline: true }}
+                    />
+                    </Box>
+                     :
+                    <Typography variant="body1" color="primary">{maxAmountAPR}%</Typography>}
+                  </Box>
+              </Box>
+              <Box display="flex" justifyContent="space-between" marginBottom="43px">
+                  <Typography variant="body1" color="primary">APR Update Rate</Typography>
+                  <Box>
+                  {stakeTarget === "updateapr" ? 
+                     <TextField 
+                      required
+                      onChange={(e) => onChange(e, setUpdateRateAPR)}  
+                      placeholder="1,000,000" 
+                      value={updateRateAPR}
+                      className={classes.input}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom }}
+                    /> : <Typography variant="body1" color="primary"><NumberFormat value={updateRateAPR} displayType={'text'} thousandSeparator={true} suffix={' API3'} /></Typography>
+                    }  
+                  </Box>
+              </Box>
+              <Box display="flex" justifyContent="space-between" marginBottom="43px">
+                  <Box width="44%">
+                    <Typography variant="body1" color="primary">Minimum voting weight to create a proposal</Typography>
+                  </Box>
+                  <Box>
+                  {stakeTarget === "voteweight" ? 
+                  <Box width="35%">
+                     <TextField 
+                      required
+                      onChange={(e) => onChange(e, setVoteWeightAmount)}  
+                      placeholder={"0.1"}
+                      value={voteWeightAmount}
+                      className={classes.input}
+                      type="number"
+                      InputProps={{ disableUnderline: true }}
+                    />
+                    </Box>
+                     :
+                    <Typography variant="body1" color="primary">{voteWeightAmount}%</Typography>}  
+                  </Box>
+              </Box>
+            </Box>
+             <Box marginBottom="24px">
+                <Box marginBottom="24px">
+                    <Typography variant="body1" color="primary">Reference</Typography>
+                </Box>
+                <TextField 
+                    required
+                    onChange={(e) => onChange(e, setLinkInfo)}  
+                    placeholder="Link to more information" 
+                    value={linkInfo}
+                    className={classes.input}
+                    InputProps={{ disableUnderline: true }}
+                />
+            </Box>
+            </Box>
+            
+            }
           <Box display="flex" justifyContent="flex-end">
             <BasicButton title="Submit Proposal" color="white" onClick={() => onSubmit()} />
           </Box> 

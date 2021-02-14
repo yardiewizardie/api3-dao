@@ -1,6 +1,5 @@
 import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import { InputBase } from "@material-ui/core";
-
 interface Props {
   color: 'black' | 'white' | 'disabled' ;
 }
@@ -31,6 +30,12 @@ const modals = {
   },
   newProposalWithOther: {
     height: "716px",
+    width: "529px",
+    borderRadius: 2,
+    padding: "16px"
+  },
+  newProposalType2: {
+    height: "806px",
     width: "529px",
     borderRadius: 2,
     padding: "16px"
