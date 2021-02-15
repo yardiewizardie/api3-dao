@@ -25,11 +25,11 @@ import React, {
     const [linkInfo, setLinkInfo] = useState("");
     const [otherAddress, setOtherAddress] = useState("");
     const [stakeTarget, setStakeTarget] = useState("staketarget");
-    const [stakeAmount, setStakeAmount] = useState("0");
-    const [minAmountAPR, setMinAmountAPR] = useState(0);
-    const [maxAmountAPR, setMaxAmountAPR] = useState(0);
-    const [updateRateAPR, setUpdateRateAPR] = useState("0");
-    const [voteWeightAmount, setVoteWeightAmount] = useState(0);
+    const [stakeAmount, setStakeAmount] = useState("10000000");
+    const [minAmountAPR, setMinAmountAPR] = useState(2.5);
+    const [maxAmountAPR, setMaxAmountAPR] = useState(75);
+    const [updateRateAPR, setUpdateRateAPR] = useState("1000000");
+    const [voteWeightAmount, setVoteWeightAmount] = useState(0.1);
 
     const { setProposalModal, setDelegateAddress, newProposalModal } = props;
     
