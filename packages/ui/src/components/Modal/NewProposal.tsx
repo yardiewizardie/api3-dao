@@ -26,10 +26,10 @@ import React, {
     const [otherAddress, setOtherAddress] = useState("");
     const [stakeTarget, setStakeTarget] = useState("staketarget");
     const [stakeAmount, setStakeAmount] = useState("0");
-    const [minAmountAPR, setMinAmountAPR] = useState();
-    const [maxAmountAPR, setMaxAmountAPR] = useState("");
-    const [updateRateAPR, setUpdateRateAPR] = useState("");
-    const [voteWeightAmount, setVoteWeightAmount] = useState("");
+    const [minAmountAPR, setMinAmountAPR] = useState(0);
+    const [maxAmountAPR, setMaxAmountAPR] = useState(0);
+    const [updateRateAPR, setUpdateRateAPR] = useState("0");
+    const [voteWeightAmount, setVoteWeightAmount] = useState(0);
 
     const { setProposalModal, setDelegateAddress, newProposalModal } = props;
     
@@ -63,7 +63,32 @@ import React, {
             });
           }}
           thousandSeparator
+          suffix={" API3"}
           // isNumericString
+        />
+      );
+    }
+
+    function NumberFormatPercentage(props: any) {
+      const { inputRef, onChange, ...other } = props;
+    
+      return (
+        <NumberFormat
+          {...other}
+          getInputRef={inputRef}
+          allowNegative={false}
+          allowLeadingZeros={false}
+          onValueChange={values => {
+            onChange({
+              target: {
+                name: props.name,
+                value: values.value
+              }
+            });
+          }}
+          isAllowed={(values) => parseInt(values.value) <= 100}
+          suffix={" %"}
+          isNumericString
         />
       );
     }
@@ -226,8 +251,7 @@ import React, {
                       placeholder={"2.5"}
                       value={minAmountAPR}
                       className={classes.input}
-                      type="number"
-                      InputProps={{ disableUnderline: true }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatPercentage }}
                     />
                     </Box>
                      :
@@ -245,8 +269,7 @@ import React, {
                       placeholder={"75"}
                       value={maxAmountAPR}
                       className={classes.input}
-                      type="number"
-                      InputProps={{ disableUnderline: true }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatPercentage }}
                     />
                     </Box>
                      :
@@ -281,8 +304,7 @@ import React, {
                       placeholder={"0.1"}
                       value={voteWeightAmount}
                       className={classes.input}
-                      type="number"
-                      InputProps={{ disableUnderline: true }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatPercentage }}
                     />
                     </Box>
                      :
