@@ -54,6 +54,7 @@ function NewProposalModal(props: any) {
       <NumberFormat
         {...other}
         getInputRef={inputRef}
+        style={{ fontSize: 16 }}
         allowNegative={false}
         onValueChange={values => {
           onChange({
@@ -77,6 +78,7 @@ function NewProposalModal(props: any) {
       <NumberFormat
         {...other}
         getInputRef={inputRef}
+        style={{ fontSize: 16 }}
         allowNegative={false}
         allowLeadingZeros={false}
         onValueChange={values => {
@@ -107,9 +109,9 @@ function NewProposalModal(props: any) {
         </Box>
         <Paper className={typeOfProposal === "type2" ? classes.newProposalType2 : 
         typeOfToken === "other" ? classes.newProposalWithOther : classes.newProposal}>
-          <Box  display="flex" alignContent="center" marginBottom="56px">
+          <Box  display="flex" alignContent="center" marginBottom="3vh">
               <Box display="flex" alignItems="center" justifyContent="center">
-                  <Typography variant="body1" color="primary">Proposal Type</Typography>
+                  <Typography variant="body2" color="primary">Proposal Type</Typography>
               </Box>
            <Box marginLeft="36px" width="174px">
               <Select
@@ -129,9 +131,9 @@ function NewProposalModal(props: any) {
           <Box>
             <Box display="flex" marginBottom="24px">
               <Box paddingRight="6px">
-                  <Typography variant="body1" color="primary">Recipient</Typography>
+                  <Typography variant="body2" color="primary">Recipient</Typography>
               </Box>
-              {typeOfToken !== "other" && <Typography variant="body1" color="textSecondary">  Must be a valid Ethereum address</Typography>}
+              {typeOfToken !== "other" && <Typography variant="body2" color="textSecondary">  Must be a valid Ethereum address</Typography>}
           </Box>
             <TextField 
               required
@@ -143,7 +145,7 @@ function NewProposalModal(props: any) {
             />
           <Box display="flex"  marginTop="36px" >
               <Box width="65%" marginRight="24px">
-              <Typography variant="body1" color="primary">Amount</Typography>
+              <Typography variant="body2" color="primary">Amount</Typography>
               <Box marginTop="24px">
                   <TextField 
                       required
@@ -155,8 +157,8 @@ function NewProposalModal(props: any) {
                   />
               </Box>
             </Box>
-            <Box width="30%">
-              <Typography variant="body1" color="primary">Token</Typography>
+            <Box width="30vh">
+              <Typography variant="body2" color="primary">Token</Typography>
               <Box marginTop="24px">
               <Select
                   fullWidth
@@ -177,7 +179,7 @@ function NewProposalModal(props: any) {
           {typeOfToken === "other" &&
           <Box marginBottom="24px" marginTop="28px">
               <Box marginBottom="24px">
-                  <Typography variant="body1" color="primary">Other Token Address</Typography>
+                  <Typography variant="body2" color="primary">Other Token Address</Typography>
               </Box>
               <TextField 
                   required
@@ -191,7 +193,7 @@ function NewProposalModal(props: any) {
           }
           <Box marginBottom="24px" marginTop="28px">
               <Box marginBottom="24px">
-                  <Typography variant="body1" color="primary">Reference</Typography>
+                  <Typography variant="body2" color="primary">Reference</Typography>
               </Box>
               <TextField 
                   required
@@ -205,9 +207,9 @@ function NewProposalModal(props: any) {
           </Box>
           :
           <Box>
-            <Box display="flex" marginBottom="24px" alignContent="center">
-              <Box paddingRight="35px" display="flex">
-                  <Typography variant="body1" color="primary">DAO Parameter to change</Typography>
+            <Box display="flex" marginBottom="2vh" alignContent="center">
+              <Box paddingRight="3vh" display="flex">
+                  <Typography variant="body2" color="primary">DAO Parameter to change</Typography>
               </Box>
               <Box width="178px">
               <Select
@@ -225,9 +227,9 @@ function NewProposalModal(props: any) {
               </Select>
               </Box>
           </Box>
-          <Box marginTop="44px" marginBottom="80px">
-            <Box display="flex" justifyContent="space-between" marginBottom="43px">
-                <Typography variant="body1" color="primary">Stake Target</Typography>
+          <Box marginTop="4vh" marginBottom="8vh">
+            <Box display="flex" justifyContent="space-between" marginBottom="4vh">
+                <Typography variant="body2" color="primary">Stake Target</Typography>
                 <Box>
                   {stakeTarget === "staketarget" ? 
                    <TextField 
@@ -237,15 +239,15 @@ function NewProposalModal(props: any) {
                     value={stakeAmount}
                     className={classes.input}
                     InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom }}
-                  /> : <Typography variant="body1" color="primary"><NumberFormat value={stakeAmount} displayType={'text'} thousandSeparator={true} suffix={' API3'} /></Typography>
+                  /> : <Typography variant="body2" color="primary"><NumberFormat value={stakeAmount} displayType={'text'} thousandSeparator={true} suffix={' API3'} /></Typography>
                   }
                 </Box>
             </Box>
-            <Box display="flex" justifyContent="space-between" marginBottom="43px">
-                <Typography variant="body1" color="primary">Minimum APR</Typography>
+            <Box display="flex" justifyContent="space-between" marginBottom="4vh">
+                <Typography variant="body2" color="primary">Minimum APR</Typography>
                 <Box>
                 {stakeTarget === "minapr" ? 
-                <Box width="35%">
+                <Box width="35vh">
                    <TextField 
                     required
                     onChange={(e) => onChange(e, setMinAmountAPR)}  
@@ -256,11 +258,11 @@ function NewProposalModal(props: any) {
                   />
                   </Box>
                    :
-                  <Typography variant="body1" color="primary">{minAmountAPR}%</Typography>}
+                  <Typography variant="body2" color="primary">{minAmountAPR}%</Typography>}
                 </Box>
             </Box>
-            <Box display="flex" justifyContent="space-between" marginBottom="43px">
-                <Typography variant="body1" color="primary">Maximum APR</Typography>
+            <Box display="flex" justifyContent="space-between" marginBottom="4vh">
+                <Typography variant="body2" color="primary">Maximum APR</Typography>
                 <Box>
                 {stakeTarget === "maxapr" ? 
                 <Box width="35%">
@@ -274,11 +276,11 @@ function NewProposalModal(props: any) {
                   />
                   </Box>
                    :
-                  <Typography variant="body1" color="primary">{maxAmountAPR}%</Typography>}
+                  <Typography variant="body2" color="primary">{maxAmountAPR}%</Typography>}
                 </Box>
             </Box>
-            <Box display="flex" justifyContent="space-between" marginBottom="43px">
-                <Typography variant="body1" color="primary">APR Update Rate</Typography>
+            <Box display="flex" justifyContent="space-between" marginBottom="4vh">
+                <Typography variant="body2" color="primary">APR Update Rate</Typography>
                 <Box>
                 {stakeTarget === "updateapr" ? 
                    <TextField 
@@ -288,13 +290,13 @@ function NewProposalModal(props: any) {
                     value={updateRateAPR}
                     className={classes.input}
                     InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom }}
-                  /> : <Typography variant="body1" color="primary"><NumberFormat value={updateRateAPR} displayType={'text'} thousandSeparator={true} suffix={' API3'} /></Typography>
+                  /> : <Typography variant="body2" color="primary"><NumberFormat value={updateRateAPR} displayType={'text'} thousandSeparator={true} suffix={' API3'} /></Typography>
                   }  
                 </Box>
             </Box>
-            <Box display="flex" justifyContent="space-between" marginBottom="43px">
+            <Box display="flex" justifyContent="space-between" marginBottom="4vh">
                 <Box width="44%">
-                  <Typography variant="body1" color="primary">Minimum voting weight to create a proposal</Typography>
+                  <Typography variant="body2" color="primary">Minimum voting weight to create a proposal</Typography>
                 </Box>
                 <Box>
                 {stakeTarget === "voteweight" ? 
@@ -309,13 +311,13 @@ function NewProposalModal(props: any) {
                   />
                   </Box>
                    :
-                  <Typography variant="body1" color="primary">{voteWeightAmount}%</Typography>}  
+                  <Typography variant="body2" color="primary">{voteWeightAmount}%</Typography>}  
                 </Box>
             </Box>
           </Box>
-           <Box marginBottom="24px">
-              <Box marginBottom="24px">
-                  <Typography variant="body1" color="primary">Reference</Typography>
+           <Box marginBottom="2vh">
+              <Box marginBottom="2vh">
+                  <Typography variant="body2" color="primary">Reference</Typography>
               </Box>
               <TextField 
                   required
