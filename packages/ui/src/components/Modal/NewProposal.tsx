@@ -278,7 +278,7 @@ function NewProposalModal(props: any) {
                   </Box>
                   <Box marginBottom="4vh">
                   {stakeTarget === "minapr" ? 
-                  <Box width="35vh">
+                  <Box width="8vh">
                      <TextField 
                       required
                       onChange={(event) => onChange(event, setMinAmountAPR)}  
@@ -293,7 +293,7 @@ function NewProposalModal(props: any) {
                   </Box>
                   <Box marginBottom="4vh">
                   {stakeTarget === "maxapr" ? 
-                  <Box width="35%">
+                  <Box width="8vh">
                      <TextField 
                       required
                       onChange={(event) => onChange(event, setMaxAmountAPR)}  
@@ -320,7 +320,7 @@ function NewProposalModal(props: any) {
                   </Box>
                   <Box>
                   {stakeTarget === "voteweight" ? 
-                  <Box width="35%">
+                  <Box width="8vh">
                      <TextField 
                       required
                       onChange={(event) => onChange(event, setVoteWeightAmount)}  
