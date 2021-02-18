@@ -268,7 +268,7 @@ function NewProposalModal(props: any) {
                       placeholder="10,000,000" 
                       value={stakeAmount}
                       className={classes.input}
-                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom, autoFocus: true }}
                     /> : (
                       <Typography variant="body2" color="primary">
                         <NumberFormat value={stakeAmount} displayType={'text'} thousandSeparator={true} suffix={' API3'} />
@@ -285,7 +285,7 @@ function NewProposalModal(props: any) {
                       placeholder={"2.5"}
                       value={minAmountAPR}
                       className={classes.input}
-                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatPercentage }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatPercentage, autoFocus: true }}
                     />
                     </Box>
                      :
@@ -300,7 +300,7 @@ function NewProposalModal(props: any) {
                       placeholder={"75"}
                       value={maxAmountAPR}
                       className={classes.input}
-                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatPercentage }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatPercentage, autoFocus: true }}
                     />
                     </Box>
                      :
@@ -314,7 +314,7 @@ function NewProposalModal(props: any) {
                       placeholder="1,000,000" 
                       value={updateRateAPR}
                       className={classes.input}
-                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom, autoFocus: true }}
                     /> : <Typography variant="body2" color="primary"><NumberFormat value={updateRateAPR} displayType={'text'} thousandSeparator={true} suffix={' API3'} /></Typography>
                     }  
                   </Box>
@@ -327,7 +327,7 @@ function NewProposalModal(props: any) {
                       placeholder={"0.1"}
                       value={voteWeightAmount}
                       className={classes.input}
-                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatPercentage }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatPercentage, autoFocus: true }}
                     />
                     </Box>
                      :
@@ -345,7 +345,7 @@ function NewProposalModal(props: any) {
                     placeholder="Link to more information" 
                     value={linkInfo}
                     className={classes.input}
-                    InputProps={{ disableUnderline: true }}
+                    InputProps={{ disableUnderline: true , autoFocus: true }}
                 />
             </Box>
             </Box>

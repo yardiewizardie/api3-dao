@@ -116,7 +116,8 @@ function StakingContainer(props?: IStakingContainer | undefined | any ) {
                   inputProps={inputProps} 
                   onChange={onChange}  
                   placeholder="0" 
-                  value={unstakeAmount} 
+                  value={unstakeAmount}
+                  InputProps={{ autoFocus: true }}
                 />
                 <BasicButton onClick={onClick} color="white" title="Initiate Unstaking" />
               </Paper>
