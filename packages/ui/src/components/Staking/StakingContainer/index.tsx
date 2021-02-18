@@ -44,10 +44,11 @@ function StakingContainer(props?: IStakingContainer | undefined | any ) {
     setActualUnstakeAmount,
     unstakeAmount, 
     setUnstakeAmount,
+    modal,
+    setUnstakeModal
   } = props;
   const classes = useStyles();
   const commonClasses = useCommonStyles();
-  const [modal, setUnstakeModal] = useState(false);
 
   const UnstakeModal = () => {
     const [nextTabModal, setTabModal] = useState(false);
