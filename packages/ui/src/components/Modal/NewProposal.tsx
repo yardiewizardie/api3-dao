@@ -75,6 +75,8 @@ function NewProposalModal(props: any) {
     );
   }
 
+  const maxButton =  <Typography variant="body2" color="primary" style={{ textDecoration: "underline", cursor: "pointer", marginLeft: "-50px" }}>MAX</Typography>;
+
   function NumberFormatPercentage(props: any) {
     const { inputRef, onChange, ...other } = props;
 
@@ -268,7 +270,7 @@ function NewProposalModal(props: any) {
                       placeholder="10,000,000" 
                       value={stakeAmount}
                       className={classes.input}
-                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom, autoFocus: true }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom, autoFocus: true, endAdornment: maxButton }}
                     /> : (
                       <Typography variant="body2" color="primary">
                         <NumberFormat value={stakeAmount} displayType={'text'} thousandSeparator={true} suffix={' API3'} />
@@ -278,7 +280,7 @@ function NewProposalModal(props: any) {
                   </Box>
                   <Box marginBottom="4vh">
                   {stakeTarget === "minapr" ? 
-                  <Box width="8vh">
+                  <Box width="12vh">
                      <TextField 
                       required
                       onChange={(event) => onChange(event, setMinAmountAPR)}  
@@ -293,7 +295,7 @@ function NewProposalModal(props: any) {
                   </Box>
                   <Box marginBottom="4vh">
                   {stakeTarget === "maxapr" ? 
-                  <Box width="8vh">
+                  <Box width="12vh">
                      <TextField 
                       required
                       onChange={(event) => onChange(event, setMaxAmountAPR)}  
@@ -314,13 +316,13 @@ function NewProposalModal(props: any) {
                       placeholder="1,000,000" 
                       value={updateRateAPR}
                       className={classes.input}
-                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom, autoFocus: true }}
+                      InputProps={{ disableUnderline: true, inputComponent: NumberFormatCustom, autoFocus: true, endAdornment: maxButton }}
                     /> : <Typography variant="body2" color="primary"><NumberFormat value={updateRateAPR} displayType={'text'} thousandSeparator={true} suffix={' API3'} /></Typography>
                     }  
                   </Box>
                   <Box>
                   {stakeTarget === "voteweight" ? 
-                  <Box width="8vh">
+                  <Box width="12vh">
                      <TextField 
                       required
                       onChange={(event) => onChange(event, setVoteWeightAmount)}  
